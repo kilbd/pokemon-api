@@ -1020,6 +1020,7 @@ dependencies = [
  "tokio",
  "tracing",
  "tracing-subscriber 0.3.1",
+ "upload-pokemon-data",
 ]
 
 [[package]]

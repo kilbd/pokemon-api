@@ -10,6 +10,7 @@ use serde_json::json;
 use sqlx::{mysql::MySqlPoolOptions, MySql, Pool};
 use std::env;
 use tracing::{error, info, instrument};
+use upload_pokemon_data::PokemonId;
 
 static POOL: OnceCell<Pool<MySql>> = OnceCell::new();
 
@@ -29,6 +30,7 @@ async fn main() -> Result<(), Error> {
 
 #[derive(Debug, sqlx::FromRow, Serialize)]
 struct PokemonHp {
+    id: PokemonId,
     name: String,
     hp: u16,
     legendary_or_mythical: bool,
@@ -61,7 +63,7 @@ async fn handler(
             info!(pokemon_name, "requested a pokemon");
             let result = sqlx::query_as!(
                 PokemonHp,
-                r#"select name, hp, legendary_or_mythical as "legendary_or_mythical!: bool"
+                r#"select id as "id!: PokemonId", name, hp, legendary_or_mythical as "legendary_or_mythical!: bool"
                 from pokemon where slug = ?"#,
                 pokemon_name
             )
@@ -109,6 +111,7 @@ mod tests {
                 multi_value_headers: HeaderMap::new(),
                 body: Some(Body::Text(
                     serde_json::to_string(&PokemonHp {
+                        id: PokemonId::from_base62("20ZNuY4ztP9J2NZNwGoluAnK47U".to_string()).unwrap(),
                         name: String::from("Bulbasaur"),
                         hp: 45,
                         legendary_or_mythical: false,

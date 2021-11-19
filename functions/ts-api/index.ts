@@ -32,9 +32,15 @@ async function handler(
             body: JSON.stringify(error),
           });
         } else {
+          let result = results[0];
           resolve({
             statusCode: 200,
-            body: JSON.stringify(results),
+            body: JSON.stringify({
+              id: result["pokemonId"],
+              name: result["name"],
+              hp: result["hp"],
+              legendary_or_mythical: result["legendary_or_mythical"] === 1,
+            }),
           });
         }
       }

@@ -3,7 +3,6 @@ directory = "functions/"
 
 [build]
 command = """
-mkdir functions &&
 cargo build --release --bin pokemon-api &&
 cp target/release/pokemon-api functions/
 """
@@ -12,4 +11,9 @@ publish = "crates"
 [[redirects]]
 from = "/api/pokemon/:slug"
 to = "/.netlify/functions/pokemon-api"
+status = 200
+
+[[redirects]]
+from = "/api/ts/pokemon/:slug"
+to = "/.netlify/functions/ts-api"
 status = 200

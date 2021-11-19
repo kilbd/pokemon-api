@@ -3,6 +3,9 @@ directory = "functions/"
 
 [build]
 command = """
+cd functions/ts-api &&
+npm install &&
+cd ../.. &&
 cargo build --release --bin pokemon-api &&
 cp target/release/pokemon-api functions/
 """

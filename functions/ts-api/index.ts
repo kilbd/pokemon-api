@@ -18,7 +18,7 @@ async function handler(
       body: JSON.stringify({ message: "Did not find Pokemon name to query." }),
     };
   }
-  return await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     pool.query(
       "select cast(id as char) as pokemonId, name, hp, legendary_or_mythical from pokemon where slug = ?",
       [pokemon],

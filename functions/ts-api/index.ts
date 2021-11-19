@@ -11,7 +11,8 @@ async function handler(
   event: HandlerEvent,
   context: HandlerContext
 ): Promise<HandlerResponse> {
-  let pokemon = event.path.split("/")[-1];
+  let pathSegments = event.path.split("/");
+  let pokemon = pathSegments[pathSegments.length - 1];
   if (!pokemon) {
     return {
       statusCode: 400,

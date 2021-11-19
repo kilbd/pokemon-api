@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@netlify/functions": "^0.9.0"
+    "@netlify/functions": "^0.9.0",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "@types/mysql": "^2.15.19",
     "typescript": "^4.5.2"
   }
 }

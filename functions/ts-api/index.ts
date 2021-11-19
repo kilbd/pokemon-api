@@ -6,7 +6,7 @@ import {
 import mysql from "mysql";
 
 let pool = mysql.createPool(
-  `${process.env.DATABASE_URL}?connectionLimit=5&ssl={"ca":"/etc/pki/tls/certs/ca-bundle.crt"}`
+  `${process.env.DATABASE_URL}?connectionLimit=5&ssl={"rejectUnauthorized": false}`
 );
 
 async function handler(

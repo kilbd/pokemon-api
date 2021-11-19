@@ -5,7 +5,9 @@ import {
 } from "@netlify/functions";
 import mysql from "mysql";
 
-let pool = mysql.createPool(`${process.env.DATABASE_URL}?connectionLimit=5`);
+let pool = mysql.createPool(
+  `${process.env.DATABASE_URL}?connectionLimit=5&ssl={"ca":"/etc/pki/tls/certs/ca-bundle.crt"}`
+);
 
 async function handler(
   event: HandlerEvent,
